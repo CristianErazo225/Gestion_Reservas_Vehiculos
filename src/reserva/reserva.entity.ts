@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import { Facturacion } from 'src/facturacion/facturacion.entity'; // Verifica la ruta según tu proyecto
 
 @Entity()
 export class Reserva {
@@ -18,9 +19,8 @@ export class Reserva {
     @Column()
     estado: string;
 
-    // @ManyToOne(() => Responsable, responsable => responsable.proyectos, { onDelete: 'SET NULL' })
-    // responsable: Responsable;
-
-    // @OneToOne(() => Detalle, detalle => detalle.proyecto)
-    // detalle: Detalle;
+    // Relación con Facturación
+    @OneToOne(() => Facturacion, facturacion => facturacion.Reserva)
+    @JoinColumn()
+    factura: Facturacion;
 }

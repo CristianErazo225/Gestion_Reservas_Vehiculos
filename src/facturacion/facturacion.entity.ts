@@ -1,5 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
+import { Reserva } from 'src/reserva/reserva.entity'; // Verifica la ruta según tu proyecto
 
 @Entity()
 export class Facturacion {
@@ -12,4 +12,9 @@ export class Facturacion {
 
     @Column() 
     MontoTotal: number;
+    
+
+    // Relación con Reserva
+    @OneToOne(() => Reserva, reserva => reserva.factura, { onDelete: 'CASCADE' })
+    Reserva: Reserva;
 }
